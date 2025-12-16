@@ -2,7 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import axios from "../../config/api/axios.js";
-import UserContext, { useUser } from "../../hooks/UserContext.jsx";
+import { useUser } from "../../hooks/UserContext.jsx";
 import { TableHeader } from "../Table.jsx";
 import Loading from "../layouts/Loading.jsx";
 import ErrorStrip from "../ErrorStrip.jsx";

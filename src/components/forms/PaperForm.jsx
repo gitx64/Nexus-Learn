@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import axios from "../../config/api/axios.js";
 import { useNavigate, Navigate } from "react-router-dom";
-import UserContext, { useUser } from "../../hooks/UserContext.jsx";
+import { useUser } from "../../hooks/UserContext.jsx";
 import { toast } from "react-toastify";
 import { FaPlus } from "react-icons/fa";
 import ErrorStrip from "../ErrorStrip.jsx";
