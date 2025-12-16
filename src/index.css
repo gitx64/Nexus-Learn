@@ -1,0 +1,20 @@
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Spectral+SC&display=swap");
+
+@layer base {
+  :root {
+    --toastify-color-light: #2563eb;
+    --toastify-text-color-light: #dbeafe;
+  }
+
+  input,
+  select,
+  textarea {
+    background-color: transparent;
+    display: block;
+  }
+
+  form {
+    accent-color: rgb(219 234 254);
+  }
+}
