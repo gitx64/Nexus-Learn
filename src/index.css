@@ -2,11 +2,67 @@
 @import url("https://fonts.googleapis.com/css2?family=Spectral+SC&display=swap");
 
 @layer base {
+  /* Light theme (default) */
   :root {
+    /* Primary colors - Blue tones for light mode */
+    --color-primary: 30 58 138; /* blue-900 equivalent */
+    --color-primary-foreground: 219 234 254; /* blue-100 */
+    
+    /* Secondary colors */
+    --color-secondary: 37 99 235; /* blue-600 */
+    --color-secondary-foreground: 248 250 252; /* slate-50 */
+    
+    /* Background colors - Light backgrounds */
+    --color-background: 248 250 252; /* slate-50 */
+    --color-background-alt: 241 245 249; /* slate-100 */
+    
+    /* Foreground/text colors - Dark text for light mode */
+    --color-foreground: 15 23 42; /* slate-900 */
+    --color-foreground-muted: 71 85 105; /* slate-600 */
+    
+    /* Accent colors */
+    --color-accent: 37 99 235; /* blue-600 */
+    --color-accent-foreground: 255 255 255;
+    
+    /* Border colors */
+    --color-border: 148 163 184; /* slate-400 */
+    
+    /* Toast colors */
     --toastify-color-light: #2563eb;
     --toastify-text-color-light: #dbeafe;
+    
+    color-scheme: light;
   }
 
+  /* Dark theme */
+  .dark {
+    /* Primary colors - Lighter blues for dark mode */
+    --color-primary: 96 165 250; /* blue-400 equivalent */
+    --color-primary-foreground: 30 58 138; /* blue-900 */
+    
+    /* Secondary colors */
+    --color-secondary: 59 130 246; /* blue-500 */
+    --color-secondary-foreground: 15 23 42; /* slate-900 */
+    
+    /* Background colors - Dark backgrounds */
+    --color-background: 15 23 42; /* slate-900 */
+    --color-background-alt: 30 41 59; /* slate-800 */
+    
+    /* Foreground/text colors - Light text for dark mode */
+    --color-foreground: 241 245 249; /* slate-100 */
+    --color-foreground-muted: 148 163 184; /* slate-400 */
+    
+    /* Accent colors */
+    --color-accent: 59 130 246; /* blue-500 */
+    --color-accent-foreground: 255 255 255;
+    
+    /* Border colors */
+    --color-border: 71 85 105; /* slate-600 */
+    
+    color-scheme: dark;
+  }
+
+  /* Reset styles */
   input,
   select,
   textarea {
@@ -14,7 +70,103 @@
     display: block;
   }
 
+  /* Form accent color */
   form {
     accent-color: rgb(219 234 254);
+  }
+
+  .dark form {
+    accent-color: rgb(96 165 250);
+  }
+
+  /* Smooth transitions for theme changes */
+  *,
+  *::before,
+  *::after {
+    transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 200ms;
+  }
+
+  /* Prevent transition on page load */
+  .no-transition,
+  .no-transition *,
+  .no-transition *::before,
+  .no-transition *::after {
+    transition: none !important;
+  }
+}
+
+/* Custom scrollbar styling */
+@layer components {
+  .scrollWidth::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .scrollWidth::-webkit-scrollbar-track {
+    @apply bg-slate-200 dark:bg-slate-800;
+  }
+
+  .scrollWidth::-webkit-scrollbar-thumb {
+    @apply bg-blue-500 dark:bg-blue-600 rounded-lg;
+  }
+
+  .scrollWidth::-webkit-scrollbar-thumb:hover {
+    @apply bg-blue-600 dark:bg-blue-500;
+  }
+
+  /* Outlet border that adapts to theme */
+  .outlet-border {
+    @apply border-l border-slate-400 dark:border-slate-700;
+  }
+
+  /* Radio button styling for theme-aware forms */
+  .radio input:checked ~ * {
+    @apply bg-blue-600 text-white dark:bg-blue-500;
+  }
+
+  .radio:has(input:checked) {
+    @apply bg-blue-600/20 dark:bg-blue-500/20;
+  }
+
+  /* Toast container theming */
+  .toast-rounded {
+    @apply rounded-lg;
+  }
+
+  .toast-body {
+    @apply text-sm font-medium;
+  }
+}
+
+/* Utility classes for text colors that adapt */
+@layer utilities {
+  .text-theme-primary {
+    color: rgb(var(--color-primary));
+  }
+
+  .text-theme-foreground {
+    color: rgb(var(--color-foreground));
+  }
+
+  .text-theme-muted {
+    color: rgb(var(--color-foreground-muted));
+  }
+
+  .bg-theme-primary {
+    background-color: rgb(var(--color-primary));
+  }
+
+  .bg-theme-background {
+    background-color: rgb(var(--color-background));
+  }
+
+  .bg-theme-background-alt {
+    background-color: rgb(var(--color-background-alt));
+  }
+
+  .border-theme {
+    border-color: rgb(var(--color-border));
   }
 }

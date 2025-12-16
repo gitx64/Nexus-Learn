@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
-// import {useUser} from "../../hooks/UserContext.jsx";
 import { DEV_USER, useUser } from "../../hooks/UserContext.jsx";
-// import ThemeContext from "../../hooks/ThemeContext.jsx";
 import { useTheme } from "../../hooks/ThemeContext.jsx";
 import axios from "../../config/api/axios";
 import { PiStudentThin, PiUserThin, PiSpinnerGapBold } from "react-icons/pi";
@@ -10,7 +8,6 @@ import { FiSun, FiMoon } from "react-icons/fi";
 import { FaUniversity } from "react-icons/fa";
 import CircleDesign from "../layouts/CircleDesign.jsx";
 import ErrorStrip from "../ErrorStrip.jsx";
-// import ErrorStrip from "./ErrorStrip.";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -34,10 +31,10 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     if (import.meta.env.VITE_DEV_BYPASS_AUTH === "true") {
-    setUser(DEV_USER);
-    navigate("/dash");
-    return;
-  }
+      setUser(DEV_USER);
+      navigate("/dash");
+      return;
+    }
     if (userType === "") {
       setError({
         response: {
@@ -61,8 +58,6 @@ const Login = () => {
         setError(err);
         setButtonText("Login");
       }
-      // if(username === 'Bret' && password === 'Bret')
-      //   navigate('/')
     }
   };
 
@@ -85,61 +80,35 @@ const Login = () => {
           )}
           <button
             onClick={toggleTheme}
-            className="absolute top-4 right-4 rounded-full bg-slate-100/80 p-3 text-2xl shadow-lg duration-200 hover:bg-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-700"
-            aria-label="Toggle theme"
+            className="group absolute right-4 top-4 rounded-full bg-slate-100/90 p-3 text-2xl shadow-lg transition-all duration-200 hover:scale-110 hover:bg-slate-200 active:scale-95 dark:bg-slate-800/90 dark:hover:bg-slate-700"
+            aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+            title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
           >
-            {theme === "light" ? <FiMoon /> : <FiSun />}
+            {theme === "light" ? (
+              <FiMoon className="animate-fadeIn" />
+            ) : (
+              <FiSun className="animate-fadeIn" />
+            )}
           </button>
           <CircleDesign />
-          
-          {/* LOGO SECTION - Replace this section with your logo */}
-          {/* <section className="z-0 mb-4 flex items-center justify-center duration-200"> */}
-            {/* Option 1: Use your custom logo image */}
-            {/* <img 
-              src="/nexusLearn.png" 
-              alt="Nexus-Learn Logo" 
-              className="h-auto w-auto md:h-40 lg:h-48 object-contain"
-            /> */}
-            
-            {/* Option 2: Keep the text logo (comment out if using image above) */}
-            {/* <div className="flex items-center gap-2 text-6xl md:text-8xl lg:gap-4">
-              <FaUniversity />
-              <h1 className="font-spectral font-semibold text-slate-900 dark:text-slate-300">
-                Nexus-
-                <span className="inline-block h-10 w-10 rounded-full bg-blue-600 dark:bg-blue-500 md:h-14 md:w-14 xl:h-14 xl:w-14"></span>
-                Learn
-              </h1>
-            </div> */}
-          {/* </section> */}
 
           <section className="z-2 mb-4 flex items-center justify-center duration-200">
-            {/* Option 1: Use your custom logo image */}
-            <img 
-              src="/nexusLearn.png" 
-              alt="Nexus-Learn Logo" 
-              className="h-40 w-auto md:h-48 lg:h-56 object-contain"
+            <img
+              src="/nexusLearn.png"
+              alt="Nexus-Learn Logo"
+              className="h-40 w-auto object-contain md:h-48 lg:h-56"
             />
-            
-            {/* Option 2: Keep the text logo (comment out if using image above) */}
-            {/* <div className="flex items-center gap-2 text-6xl md:text-8xl lg:gap-4">
-              <FaUniversity />
-              <h1 className="font-spectral font-semibold text-slate-900 dark:text-slate-300">
-                Nexus-
-                <span className="inline-block h-10 w-10 rounded-full bg-blue-600 dark:bg-blue-500 md:h-14 md:w-14 xl:h-14 xl:w-14"></span>
-                Learn
-              </h1>
-            </div> */}
           </section>
-          
-          <section className="z-0 w-[65%] justify-self-center rounded-lg bg-slate-100 opacity-80 hover:opacity-100 focus:opacity-100 duration-200 dark:bg-[#060913] sm:w-[min(50%,360px)] md:w-[min(40%,360px)] xl:w-[min(23%,360px)]">
+
+          <section className="z-0 w-[65%] justify-self-center rounded-lg bg-slate-100 opacity-90 shadow-2xl transition-all duration-200 hover:opacity-100 hover:shadow-blue-500/20 focus-within:opacity-100 dark:bg-[#060913] dark:shadow-blue-500/10 sm:w-[min(50%,360px)] md:w-[min(40%,360px)] xl:w-[min(23%,360px)]">
             <form
-              className="tracking-wide placeholder:text-slate-200 dark:placeholder:text-blue-200"
+              className="tracking-wide placeholder:text-slate-400 dark:placeholder:text-slate-500"
               onSubmit={(e) => handleLogin(e)}
             >
               <section className="flex flex-col items-center justify-start">
                 <div className="flex w-full text-lg">
                   <label
-                    className="radio relative flex w-1/2 cursor-pointer flex-col items-center rounded-tl-lg p-4 dark:border-l-[1.5px] dark:border-t-[1.5px] dark:border-solid dark:border-blue-600"
+                    className="radio relative flex w-1/2 cursor-pointer flex-col items-center rounded-tl-lg p-4 transition-all duration-200 hover:bg-blue-100 dark:border-l-[1.5px] dark:border-t-[1.5px] dark:border-solid dark:border-blue-600 dark:hover:bg-slate-800"
                     htmlFor="staff"
                   >
                     Staff
@@ -153,7 +122,7 @@ const Login = () => {
                     />
                   </label>
                   <label
-                    className="radio relative flex w-1/2 cursor-pointer flex-col items-center rounded-tr-lg p-4 dark:border-r-[1.5px] dark:border-t-[1.5px] dark:border-solid dark:border-blue-600"
+                    className="radio relative flex w-1/2 cursor-pointer flex-col items-center rounded-tr-lg p-4 transition-all duration-200 hover:bg-blue-100 dark:border-r-[1.5px] dark:border-t-[1.5px] dark:border-solid dark:border-blue-600 dark:hover:bg-slate-800"
                     htmlFor="student"
                   >
                     Student
@@ -167,7 +136,7 @@ const Login = () => {
                     />
                   </label>
                 </div>
-                <div className="flex duration-200 w-full justify-center p-1 pt-0 text-8xl dark:border-x-[1.5px] dark:border-solid dark:border-blue-600 md:p-3 md:pt-0">
+                <div className="flex w-full justify-center p-1 pt-0 text-8xl transition-all duration-200 dark:border-x-[1.5px] dark:border-solid dark:border-blue-600 md:p-3 md:pt-0">
                   {userType === "student" ? (
                     <PiStudentThin className="animate-slide rounded-full border-2 border-slate-900 p-1 font-light dark:border-slate-300 md:p-2" />
                   ) : userType === "staff" ? (
@@ -181,7 +150,7 @@ const Login = () => {
                 {userType ? (
                   <>
                     <input
-                      className="mb-4 block h-10 w-full rounded-md border-[1.5px] border-solid border-slate-400 p-1 pl-2 outline-none selection:border-slate-200 focus:border-blue-600 dark:border-slate-200 dark:caret-inherit dark:focus:border-blue-400 dark:active:border-blue-400"
+                      className="mb-4 block h-10 w-full rounded-md border-[1.5px] border-solid border-slate-400 bg-white p-1 pl-2 outline-none selection:border-slate-200 focus:border-blue-600 dark:border-slate-600 dark:bg-slate-900 dark:caret-inherit dark:focus:border-blue-400 dark:active:border-blue-400"
                       placeholder="username"
                       id="username"
                       type="text"
@@ -192,7 +161,7 @@ const Login = () => {
                       onChange={(e) => setUsername(e.target.value)}
                     />
                     <input
-                      className="mb-4 block h-10 w-full rounded-md border-[1.5px] border-solid border-slate-400 p-1 pl-2 outline-none selection:border-slate-200 focus:border-blue-600 dark:border-slate-200 dark:caret-inherit dark:focus:border-blue-400 dark:active:border-blue-400"
+                      className="mb-4 block h-10 w-full rounded-md border-[1.5px] border-solid border-slate-400 bg-white p-1 pl-2 outline-none selection:border-slate-200 focus:border-blue-600 dark:border-slate-600 dark:bg-slate-900 dark:caret-inherit dark:focus:border-blue-400 dark:active:border-blue-400"
                       placeholder="password"
                       id="password"
                       type="password"
@@ -202,7 +171,7 @@ const Login = () => {
                       onChange={(e) => setPassword(e.target.value)}
                     />
                     <button
-                      className="mb-1 flex h-10 w-full items-center justify-center gap-1 rounded-md border-[1.5px] border-solid border-blue-600 bg-slate-800 p-1 font-bold tracking-wide text-slate-200 hover:bg-blue-700 focus:bg-blue-700 disabled:cursor-wait dark:border-blue-400 dark:bg-blue-600 dark:text-slate-50 dark:hover:bg-slate-900 dark:focus:bg-slate-900 lg:mb-2"
+                      className="mb-1 flex h-10 w-full items-center justify-center gap-1 rounded-md border-[1.5px] border-solid border-blue-600 bg-slate-800 p-1 font-bold tracking-wide text-slate-200 transition-all duration-200 hover:bg-blue-700 focus:bg-blue-700 active:scale-95 disabled:cursor-wait disabled:opacity-50 dark:border-blue-400 dark:bg-blue-600 dark:text-slate-50 dark:hover:bg-slate-900 dark:focus:bg-slate-900 lg:mb-2"
                       type="submit"
                       value="Login"
                       disabled={buttonText !== "Login"}
@@ -215,12 +184,12 @@ const Login = () => {
                     </button>
                   </>
                 ) : (
-                  <p className="w-full bg-blue-300 dark:bg-blue-950/90 duration-200 rounded p-4 my-12 text-center">
+                  <p className="my-12 w-full rounded bg-blue-200 p-4 text-center duration-200 dark:bg-blue-950/90">
                     Select User Type
                   </p>
                 )}
                 {error ? <ErrorStrip error={error} /> : ""}
-                <p className="inline text-slate-600 dark:text-blue-200">
+                <p className="inline text-slate-600 dark:text-slate-400">
                   Click to{" "}
                 </p>
                 <button
